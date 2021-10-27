@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  description: This API provides event stats
+  version: "1.0.0"
+  title: Stats API
+  contact:
+    email: karandeepsingh1@my.bcit.ca
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: admins
+    description: Operations available to restaurants ands
+paths:
+  /stats:
+    get:
+      summary: Gets the event stats
+      operationId: app.get_stats
+      description: Get Cake Orders statistics
+      responses:
+        '200':
+          description: Successfully returned a list of vanilla cake events
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ReadingStats'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    ReadingStats:
+      required:
+      - num_vanilla_orders
+      - num_chocolate_orders
+      - max_vanilla_orders
+      - max_chocolate_orders
+      properties:
+        num_vanilla_orders:
+          type: integer
+          example: 50000
+        num_chocolate_orders:
+          type: integer
+          example: 25000
+        max_vanilla_orders:
+          type: integer
+          example: 1500
+        max_chocolate_orders:
+          type: integer
+          example: 1000
+
+
+
