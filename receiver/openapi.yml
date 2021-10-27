@@ -1,0 +1,113 @@
+openapi: 3.0.0
+info:
+  description: This API will receive orders from grocery stores and restaurants
+  version: "1.0.0"
+  title: Order taking API
+  contact:
+    email: karandeepsingh1@my.bcit.ca
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: admins
+    description: Operations available to restaurants ands
+paths:
+  /inventory/vanillacake:
+    post:
+      tags:
+        - restaurants 
+      summary: Adds the vanillacake order
+      operationId: app.order_vanilla_cake
+      description: Adds an order of vanilla cake to the system
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vanillaCake'
+        description: Inventory item to add
+        
+
+  /inventory/chocolatecake:
+    post:
+      tags:
+        - restaurants 
+      summary: Adds the chocolate cake order
+      operationId: app.order_chocolate_cake
+      description: Adds an order of chocolate cake to the system
+      responses:
+        '201':
+          description: item created
+        '400':
+          description: 'invalid input, object invalid'
+        '409':
+          description: an existing item already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChocolateCake'
+        description: Inventory item to add
+        
+        
+components:
+  schemas:
+    ChocolateCake:
+      type: object
+      required:
+        - cake_id
+        - name
+        - chocolate_type
+        - preparation_method
+        - sell_by_date
+      properties:
+        cake_id:
+          type: integer
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        name:
+          type: string
+          example: chocolate Orange Cake
+        chocolate_type: 
+          type: string
+          example: milk chocolate
+        sell_by_date:
+          type: string
+          format: date-time
+          example: '2016-08-29'
+        preparation_method:
+          type: string
+          example: Creaming
+          
+    vanillaCake:
+      required: 
+        - cake_id
+        - name
+        - vanilla_type
+        - preparation_method
+        - sell_by_date
+        
+      properties:
+        cake_id: 
+          type: integer
+          example: d290f1ee-6c54-4b01-90e6-d701748f0852
+        name:
+          type: string
+          example: Vanilla Butter Cake
+        vanilla_type: 
+          type: string
+          example: Thrive market organic vanilla
+        sell_by_date:
+          type: string
+          format: date-time
+          example: '2016-08-29'
+        preparation_method:
+          type: string
+          example: all-in-one
+      type: object
