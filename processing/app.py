@@ -8,7 +8,7 @@ import yaml
 import logging
 import logging.config
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask_cors import CORS,cross_origin
+from flask_cors import CORS, cross_origin
 
 EVENT_FILE = "events.json"
 MAX_EVENTS = 12
@@ -150,7 +150,7 @@ def get_stats():
 
 app = connexion.FlaskApp(__name__, specification_dir='')
 CORS(app.app)
-app.app.config['CORS_HEADERS']='Content-Type'
+app.app.config['CORS_HEADERS'] = 'Content-Type'
 app.add_api("openapi.yml", strict_validation=True, validate_responses=True)
 
 if __name__ == "__main__":
