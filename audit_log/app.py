@@ -5,6 +5,7 @@ import logging.config
 import connexion
 from connexion import NoContent
 from pykafka import KafkaClient
+from flask_cors import CORS,cross_origin
 
 
 with open ('log_conf.yml', 'r') as f:
