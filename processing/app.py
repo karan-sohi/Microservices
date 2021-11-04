@@ -8,6 +8,7 @@ import yaml
 import logging
 import logging.config
 from apscheduler.schedulers.background import BackgroundScheduler
+from flask_cors import CORS,cross_origin
 
 EVENT_FILE = "events.json"
 MAX_EVENTS = 12
