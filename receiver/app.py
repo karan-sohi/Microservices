@@ -28,6 +28,7 @@ while (retry_count < app_config["connect"]["max_retries"]):
         try:
             client = KafkaClient(hosts=f"{log_config['events']['hostname']}:{log_config['events']['port']}")
             topic = client.topics[str.encode(log_config['events']['topic'])]
+            producer = topic.get_sync_producer()
             logger.info(f"The connection has been established {retry_count}")
             retry_count = app_config["connect"]["max_retries"]
         except:
@@ -39,8 +40,7 @@ def order_vanilla_cake(body):
     """Recieves a Vanilla Cake Order"""
 
     logger.info(f"Received event vanilla cake order request with a unique cake_id of {body['cake_id']} \n")
-    
-    producer = topic.get_sync_producer()
+   
 
     msg = { "type": "vanilla", 
             "datetime":
@@ -65,8 +65,7 @@ def order_chocolate_cake(body):
     """ Receives a chocolate cake order event """
 
     logger.info(f"Received event chocolate cake order request with a unique cake_id of {body['cake_id']} \n")
-    
-    producer = topic.get_sync_producer()
+   
 
     msg = { "type": "chocolate", 
             "datetime":
