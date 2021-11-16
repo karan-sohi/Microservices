@@ -114,15 +114,15 @@ def process_messages():
                           app_config["events"]["port"])
     retry_count = 0
     
-    while (retry_count < 20):
+    while (retry_count < app_config["connect"]["max_retries"]):
         time.sleep(2)
         try:
             client = KafkaClient(hosts=hostname)
             topic = client.topics[str.encode(app_config["events"]["topic"])]
-            logger.info("The connection has been established", retry_count)
-            retry_count = 5
+            logger.info(f"The connection has been established {retry_count}")
+            retry_count = app_config["connect"]["max_retries"]
         except:
-            logger.info("The connection has not been established", retry_count)
+            logger.info(f"Connection not established. Still loading. {retry_count}")
         retry_count += 1
 
 
