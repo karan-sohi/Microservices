@@ -40,12 +40,13 @@ MAX_EVENTS = 12
 EVENT_LIST = []
 
 
-def get_vanilla_cake_orders(timestamp):
+def get_vanilla_cake_orders(timestamp, end_timestamp):
     """Gets new vanilla cake orders after the timestamp"""
 
     session = DB_SESSION()
     timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
-    readings = session.query(VanillaCake).filter(VanillaCake.date_created >= timestamp_datetime)
+    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
+    readings = session.query(VanillaCake).filter(VanillaCake.date_created >= timestamp_datetime, VanillaCake.date_created < end_timestamp_datetime)
     results_list = []
     for reading in readings:
         results_list.append(reading.to_dict())
@@ -55,12 +56,13 @@ def get_vanilla_cake_orders(timestamp):
     return results_list, 200
 
 
-def get_chocolate_cake_orders(timestamp):
+def get_chocolate_cake_orders(timestamp, end_timestamp):
     """Gets new chocolate cake orders after the timestamp"""
  
     session = DB_SESSION()
     timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
-    readings = session.query(ChocolateCake).filter(ChocolateCake.date_created >= timestamp_datetime)
+    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
+    readings = session.query(ChocolateCake).filter(ChocolateCake.date_created >= timestamp_datetime, ChocolateCake.date_created < end_timestamp_datetime)
     results_list = []
     for reading in readings:
         results_list.append(reading.to_dict())
