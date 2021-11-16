@@ -51,8 +51,8 @@ def populate_stats():
 
 
     # GET the data from the Storage Service
-    vanilla_response = requests.get(f"{app_config['eventstore']['url']}/inventory/vanillacake?timestamp="+timestamp+ "&end_timestamp=" + current_time)
-    chocolate_response = requests.get(f"{app_config['eventstore']['url']}/inventory/chocolatecake?timestamp=" + timestamp + "&end_timestamp=" + current_time)
+    vanilla_response = requests.get(f"{app_config['eventstore']['url']}/inventory/vanillacake?timestamp="+timestamp+ "&end_timestamp=" + current_timestamp)
+    chocolate_response = requests.get(f"{app_config['eventstore']['url']}/inventory/chocolatecake?timestamp=" + timestamp + "&end_timestamp=" + current_timestamp)
 
     print(f"Vanilla Response: {vanilla_response}")
     print(f"Chocolate Content: {chocolate_response}")
