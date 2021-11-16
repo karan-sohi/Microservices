@@ -42,7 +42,14 @@ paths:
       parameters:
         - name: timestamp
           in: query
-          description: Limits the number of orders on a page
+          description: Limits the number of orders from this starting timestamp
+          schema:
+            type: string
+            format: date-time
+            example: 2016-08-29T09:12:33:001Z
+        - name: end_timestamp
+          in: query
+          description: Limits the number of orders upto this timestamp
           schema:
             type: string
             format: date-time
@@ -97,7 +104,14 @@ paths:
       parameters:
         - name: timestamp
           in: query
-          description: Limits the number of orders on a page
+          description: Limits the number of orders from this starting timestamp
+          schema:
+            type: string
+            format: date-time
+            example: 2016-08-29T09:12:33:001Z
+        - name: end_timestamp
+          in: query
+          description: Limits the number of orders upto this timestamp
           schema:
             type: string
             format: date-time
@@ -177,3 +191,4 @@ components:
           type: string
           example: all-in-one
       type: object
+
