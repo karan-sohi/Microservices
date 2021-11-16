@@ -11,4 +11,4 @@ events:
   topic: events
 connect:
   max_retries: 5
-  
+  sleep_time: 3  
