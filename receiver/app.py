@@ -21,10 +21,11 @@ with open ('log_conf.yml', 'r') as f:
     logging.config.dictConfig(log_config)
     logger = logging.getLogger('basicLogger')
     
-client = KafkaClient(hosts=f"{log_config['events']['hostname']}:{log_config['events']['port']}")
+retry_count = 0
 while (retry_count < app_config["connect"]["max_retries"]):
         time.sleep(app_config["connect"]["sleep_time"])
         try:
+            client = KafkaClient(hosts=f"{log_config['events']['hostname']}:{log_config['events']['port']}")
             topic = client.topics[str.encode(log_config['events']['topic'])]
             logger.info(f"The connection has been established {retry_count}")
             retry_count = app_config["connect"]["max_retries"]
