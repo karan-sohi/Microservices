@@ -45,14 +45,14 @@ def populate_stats():
     # This will read the last updated value from data.json file and update the parameters for GET endpoint to Storage
     with open(app_config["datastore"]["filename"], "r") as json_file:
         content = json.loads(json_file.read())
-        params = {
-            "timestamp": content["last_updated"] + 'Z'
-        }
+        timestamp = content["last_updated"] + 'Z'
+        current_timestamp = current_time + 'Z'
+        
 
 
     # GET the data from the Storage Service
-    vanilla_response = requests.get(f"{app_config['eventstore']['url']}/inventory/vanillacake", params=params)
-    chocolate_response = requests.get(f"{app_config['eventstore']['url']}/inventory/chocolatecake", params=params)
+    vanilla_response = requests.get(f"{app_config['eventstore']['url']}/inventory/vanillacake?timestamp="+timestamp+ "&end_timestamp=" + current_time)
+    chocolate_response = requests.get(f"{app_config['eventstore']['url']}/inventory/chocolatecake?timestamp=" + timestamp + "&end_timestamp=" + current_time)
 
     print(f"Vanilla Response: {vanilla_response}")
     print(f"Chocolate Content: {chocolate_response}")
