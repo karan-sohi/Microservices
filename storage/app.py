@@ -115,7 +115,7 @@ def process_messages():
     retry_count = 0
     
     while (retry_count < app_config["connect"]["max_retries"]):
-        time.sleep(2)
+        time.sleep(app_config["connect"]["sleep_time"])
         try:
             client = KafkaClient(hosts=hostname)
             topic = client.topics[str.encode(app_config["events"]["topic"])]
