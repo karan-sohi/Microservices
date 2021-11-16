@@ -114,10 +114,11 @@ def process_messages():
                           app_config["events"]["port"])
     retry_count = 0
 
-    client = KafkaClient(hosts=hostname)
-    topic = client.topics[str.encode(app_config["events"]["topic"])]
-    logger.info("The connection has been established")
-
+    try:
+        client = KafkaClient(hosts=hostname)
+        topic = client.topics[str.encode(app_config["events"]["topic"])]
+    except:
+        logger.info("The connection has been established")
 
 
     # Create a consume on a consumer group, that only reads new messages
