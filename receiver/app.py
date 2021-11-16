@@ -20,18 +20,24 @@ with open ('log_conf.yml', 'r') as f:
     log_config = yaml.safe_load(f.read())
     logging.config.dictConfig(log_config)
     logger = logging.getLogger('basicLogger')
-
-
+    
+client = KafkaClient(hosts=f"{log_config['events']['hostname']}:{log_config['events']['port']}")
+while (retry_count < app_config["connect"]["max_retries"]):
+        time.sleep(app_config["connect"]["sleep_time"])
+        try:
+            topic = client.topics[str.encode(log_config['events']['topic'])]
+            logger.info(f"The connection has been established {retry_count}")
+            retry_count = app_config["connect"]["max_retries"]
+        except:
+            logger.info(f"Connection not established. Still loading. {retry_count}")
+        retry_count += 1
 
 
 def order_vanilla_cake(body):
     """Recieves a Vanilla Cake Order"""
 
     logger.info(f"Received event vanilla cake order request with a unique cake_id of {body['cake_id']} \n")
-
-
-    client = KafkaClient(hosts=f"{log_config['events']['hostname']}:{log_config['events']['port']}")
-    topic = client.topics[str.encode(log_config['events']['topic'])]
+    
     producer = topic.get_sync_producer()
 
     msg = { "type": "vanilla", 
@@ -57,10 +63,7 @@ def order_chocolate_cake(body):
     """ Receives a chocolate cake order event """
 
     logger.info(f"Received event chocolate cake order request with a unique cake_id of {body['cake_id']} \n")
-
-
-    client = KafkaClient(hosts=f"{log_config['events']['hostname']}:{log_config['events']['port']}")
-    topic = client.topics[str.encode(log_config['events']['topic'])]
+    
     producer = topic.get_sync_producer()
 
     msg = { "type": "chocolate", 
