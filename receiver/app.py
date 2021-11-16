@@ -7,6 +7,7 @@ import logging
 import logging.config
 import datetime
 import json
+import time
 from pykafka import KafkaClient
 
 EVENT_FILE = "events.json"
