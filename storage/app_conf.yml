@@ -9,3 +9,6 @@ events:
   hostname: karankafka.eastus2.cloudapp.azure.com
   port: 9092
   topic: events
+connect:
+  max_retries: 5
+  
