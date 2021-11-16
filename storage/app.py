@@ -1,6 +1,7 @@
 import connexion
 from connexion import NoContent
 import json
+import time
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -112,9 +113,11 @@ def process_messages():
     hostname = "%s:%d" % (app_config["events"] ["hostname"], 
                           app_config["events"]["port"])
     retry_count = 0
-    
-    client = KafkaClient(hosts=hostname)
-    topic = client.topics[str.encode(app_config["events"]["topic"])]
+    time.sleep(app_config["connect"]["sleep_time"])
+    while (retry_count < app_config["connect"]["max_retries"]):
+        client = KafkaClient(hosts=hostname)
+        topic = client.topics[str.encode(app_config["events"]["topic"])]
+        retry_count += 1
 
     # Create a consume on a consumer group, that only reads new messages
     # (uncommitted messages) when the service re-starts (i.e., it doesn't
