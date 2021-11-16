@@ -10,5 +10,5 @@ events:
   port: 9092
   topic: events
 connect:
-  max_retries: 5
-  sleep_time: 3  
+  max_retries: 10
+  sleep_time: 7
