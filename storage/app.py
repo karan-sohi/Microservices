@@ -116,6 +116,7 @@ def process_messages():
 
     client = KafkaClient(hosts=hostname)
     topic = client.topics[str.encode(app_config["events"]["topic"])]
+    print("The connection has established")
 
 
 
