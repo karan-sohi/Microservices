@@ -117,8 +117,11 @@ def process_messages():
     try:
         client = KafkaClient(hosts=hostname)
         topic = client.topics[str.encode(app_config["events"]["topic"])]
-    except:
         logger.info("The connection has been established")
+        logger.debug("The connection has been establihsed")
+    except:
+        logger.info("The connection has not been established")
+        logger.debug("The connection has not been established")
 
 
     # Create a consume on a consumer group, that only reads new messages
