@@ -53,6 +53,10 @@ services:
     image: receiver
     ports:
       - "8080:8080"
+    environment:
+      - TARGET_ENV=test
+    volumes:
+      - /home/azureuser/config/receiver:/config
     depends_on:
       - "kafka"
 
@@ -60,6 +64,10 @@ services:
     image: storage
     ports:
       - "8090:8090"
+    environment:
+      - TARGET_ENV=test
+    volumes:
+      - /home/azureuser/config/storage:/config 
     depends_on:
       - "kafka"
 
@@ -67,12 +75,20 @@ services:
     image: audit_log
     ports:
       - "8110:8110"
+    environment:
+      - TARGET_ENV=test
+    volumes:
+      - /home/azureuser/config/audit_log:/config      
     depends_on:
       - "kafka"
   
   processing:
     image: processing
     network_mode: "host"
+    environment:
+      - TARGET_ENV=test
+    volumes:
+      - /home/azureuser/config/processing:/config    
     depends_on:
       - "storage"
 
