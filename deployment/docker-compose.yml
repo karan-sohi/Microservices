@@ -92,7 +92,8 @@ services:
       - TARGET_ENV=test
     volumes:
       - /home/azureuser/config/processing:/config    
-      - /home/azureuser/logs:/logs      
+      - /home/azureuser/logs:/logs 
+      - processing-db:/data
     depends_on:
       - "storage"
 
@@ -107,3 +108,4 @@ services:
 #Names our volume
 volumes:
   my-db:
+  processing-db:
