@@ -101,8 +101,6 @@ services:
     image: dashboard
     ports:
       - "3000:3000"
-    volumes:
-      - /home/azureuser/logs:/logs
     depends_on: 
       - "processing"
       - "audit_log"
