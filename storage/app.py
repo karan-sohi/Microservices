@@ -41,13 +41,13 @@ logger = logging.getLogger('basicLogger')
 logger.info("App Conf File: %s" % app_conf_file)
 logger.info("Log Conf File: %s" % log_conf_file)
 
-with open ('log_conf.yml', 'r') as f:
+with open (log_conf_file, 'r') as f:
     log_config = yaml.safe_load(f.read())
     logging.config.dictConfig(log_config)
     logger = logging.getLogger('basicLogger')
 
 
-with open ('app_conf.yml', 'r') as f:
+with open (app_conf_file, 'r') as f:
     app_config = yaml.safe_load(f.read())
 logger.info(f" Connecting to DB, Hostname: {app_config['datastore']['hostname']}, Port: {app_config['datastore']['port']}")
 
