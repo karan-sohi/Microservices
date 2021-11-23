@@ -1,8 +1,0 @@
-version: 1
-eventstore1: 
-  url: http://localhost:8090/inventory/vanillacake
-eventstore2:
-  url: http://localhost:8090/inventory/chocolatecake
-connect:
-  max_retries: 10
-  sleep_time: 2
