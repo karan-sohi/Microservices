@@ -52,7 +52,7 @@ def populate_stats():
 
 
     # Check if data.json file exists, If it doesen't, then this block will create the new file with starting values
-    check_data_file = os.path.isfile("./data.json")
+    check_data_file = os.path.isfile("/data/data.json")
     if check_data_file == False:
         starting_data = {
         "num_vanilla_orders": 0,
